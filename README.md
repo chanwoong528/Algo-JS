@@ -5,3 +5,4 @@
   2. Naive String Search
 - Sort
   1. Bubble Sort
+  2. Selection Sort
