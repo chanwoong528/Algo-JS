@@ -137,7 +137,6 @@ list.push(1);
 list.push(2);
 list.push(3);
 list.push(4);
-
 list.traverse();
 list.reverse();
 list.traverse();
