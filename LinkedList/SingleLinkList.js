@@ -118,15 +118,28 @@ class SingleLinkList {
       start = start.next;
     }
   }
+  reverse() {
+    let node = this.head;
+    this.head = this.tail;
+    this.tail = node;
+    let next;
+    let prev = null;
+    for (let i = 0; i < this.length; i++) {
+      next = node.next;
+      node.next = prev;
+      prev = node;
+      node = next;
+    }
+  }
 }
 let list = new SingleLinkList();
 list.push(1);
 list.push(2);
 list.push(3);
 list.push(4);
-list.insert(2, 6);
-list.remove(2);
-list.remove(1);
+
+list.traverse();
+list.reverse();
 list.traverse();
 // list.unshift(5);
 // console.log("!!", list.head);
