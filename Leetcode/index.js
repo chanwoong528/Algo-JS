@@ -1,4 +1,4 @@
-console.log("index");
+console.log("LeetCode");
 var isPalindrome = function (x) {
   let strInput = x.toString();
 
@@ -101,4 +101,4 @@ var mergeTwoLists = function (list1, list2) {
 
   return result;
 };
-mergeTwoLists([], []);
+console.log(mergeTwoLists([1, 2, 4], [1, 3, 4]));
