@@ -75,30 +75,120 @@ var isValid = function (s) {
   return false;
 };
 //console.log(isValid("(){}[]"));
-
 var mergeTwoLists = function (list1, list2) {
   let result = [];
-  let i = 0;
-  let j = 0;
-  while (list1.length + list2.length !== result.length) {
-    if (list1.length === i && list2.length > j) {
-      result.push(list2[j]);
-      j++;
+  while (list1.length && list2.length) {
+    if (list1[0] <= list2[0]) {
+      result.push(list1[0]);
+      list1.shift();
     }
-    if (list1.length > i && list2.length === j) {
-      result.push(list1[i]);
-      i++;
+    if (list1[0] > list2[0]) {
+      result.push(list2[0]);
+      list2.shift();
     }
-    if (list1[i] <= list2[j]) {
-      result.push(list1[i]);
-      i++;
-    }
-    if (list1[i] > list2[j]) {
-      result.push(list2[j]);
-      j++;
-    }
+  }
+  if (list1.length) {
+    result = result.concat(list1);
+  } else if (list2.length) {
+    result = result.concat(list2);
   }
 
   return result;
 };
 console.log(mergeTwoLists([1, 2, 4], [1, 3, 4]));
+// leetcode example
+// function ListNode(val, next) {
+//   this.val = val === undefined ? 0 : val;
+//   this.next = next === undefined ? null : next;
+// }
+// var mergeTwoLists = function (list1, list2) {
+//   const start = new ListNode(0);
+//   let p1 = list1;
+//   let p2 = list2;
+//   let p = start;
+//   while (p1 && p2) {
+//     if (p1.val <= p2.val) {
+//       p.next = p1;
+//       p1 = p1.next;
+//     } else {
+//       p.next = p2;
+//       p2 = p2.next;
+//     }
+//     p = p.next;
+//   }
+//   if (p1) {
+//     p.next = p1;
+//   } else if (p2) {
+//     p.next = p2;
+//   }
+//   return start.next;
+// };
+
+const nums = [1, 3, 5, 6];
+var searchInsert = function (nums, target) {
+  if (target > nums[nums.length - 1]) {
+    return nums.length;
+  }
+  if (target < nums[0]) {
+    return 0;
+  }
+  for (let i = 0; i < nums.length; i++) {
+    console.log(`${nums[i]} : ${i}`);
+    if (target === nums[i]) {
+      return i;
+    } else if (target > nums[i - 1] && target < nums[i]) {
+      return i;
+    }
+  }
+};
+//console.log(searchInsert(nums, 2));
+
+const haystack = "hello",
+  needle = "ll";
+
+var strStr = function (haystack, needle) {
+  let index;
+  let counter = 0;
+  let found = false;
+  if (needle.length === 0) return 0;
+  for (let i = 0; i < haystack.length; i++) {
+    if (found === true) {
+      break;
+    }
+    for (let j = 0; j < needle.length; j++) {
+      console.log(`${haystack[i + j]}  :  ${needle[j]}`);
+      if (haystack[i + j] !== needle[j]) {
+        break;
+      }
+      if (j === needle.length - 1) {
+        index = i;
+        counter++;
+        found = true;
+      }
+    }
+  }
+
+  return counter === 0 ? -1 : index;
+};
+//console.log(strStr(haystack, needle));
+const nums1 = [-1, 0, 3, 5, 9, 12],
+  target = 9;
+var search = function (nums, target) {
+  let s = 0;
+  let e = nums.length - 1;
+  let m = Math.floor((s + e) / 2);
+  while (nums[m] !== target && s <= e) {
+    if (nums[m] > target) {
+      e = m - 1;
+    } else {
+      s = m + 1;
+    }
+    m = Math.floor((s + e) / 2);
+  }
+  if (nums[m] === target) {
+    return m;
+  }
+  return -1;
+};
+
+console.log(search(nums1, target));
